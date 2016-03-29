@@ -13,7 +13,7 @@ Per proporre modifiche ed arricchire questo repository potete utilizzare il [mec
 * I risultati di una query SPARQL possono essere "renderizzati" secondo diversi formati.
     * XML. SPARQL prevede uno specifico vocabolario per ottenere i risultati sotto forma di tabelle.
     * JSON. Consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in database quali MongoDB.
-    * RDF. Per specifici risultati dell'endpoint (costruiti tramite query CONSTRUCT) si ottengono RDF serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
+    * RDF. Per specifici risultati dell'endpoint (costruiti tramite query CONSTRUCT) si ottengono dati in RDF serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
     * HTML. Quando viene utilizzato un form per gestire le query SPARQL. In genere viene implementato applicando un XLS per trasfomrare i risultati dal formato XML.
 
 ## Struttura base di una query SPARQL
@@ -40,3 +40,19 @@ WHERE {
 # modificatori
 ORDER BY ...
 ```
+
+## Identificazioni di pattern all'interno di dati RDF
+
+## Filtri in SPARQL
+
+## Operatori in SPARQL
+
+## Requisiti opzionali all'interno delle query
+
+## Costrutti in SPARQL: ASK, DESCRIBE, CONSTRUCT
+
+## Query avanzate
+
+### Negazione in una query SPARQL
+
+### Query federate: combinare dati provenienti da diversi endpoint
