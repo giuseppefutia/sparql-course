@@ -9,7 +9,7 @@ Per proporre modifiche ed arricchire questo repository potete utilizzare il [mec
 ## Architettura ed endpoint SPARQL
 * Le query SPARQL vengono eseguite su dataset pubblicati secondo il modello RDF. 
 * Un endpoint SPARQL è in grado di accettare ed eseguire query i cui risultati sono disponibili via HTTP.
-    * A seconda delle impostazioni definite sugli endpoint, è possibile interrogare dati appartenenti a dataset differenti.
+    * A seconda delle impostazioni definite sugli endpoint, è possibile interrogare e combinare tra loro dati appartenenti a dataset differenti.
 * I risultati di una query SPARQL possono essere "renderizzati" secondo diversi formati.
     * **XML**. SPARQL prevede uno specifico vocabolario per ottenere i risultati sotto forma di tabelle.
     * **JSON**. Consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in database quali MongoDB.
@@ -82,11 +82,36 @@ WHERE {
 * [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3Fmovie+%3Fdistributor%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
-* In questo caso la risorsa  <http://dbpedia.org/resource/Stanley_Kubrick> non è il soggetto, ma è l'oggetto dell'asserzione. Cosa sarebbe accaduto se avessi invertito?
-* All'interno del dataset non c'è un collegamento esplicito tra Stanley Kubrick e le case di distribuzione con cui ha lavorato, ma lo posso ricavare dall'attraversamento del grafo.
+* In questo caso la risorsa  <http://dbpedia.org/resource/Stanley_Kubrick> non è il soggetto, ma è l'oggetto dell'asserzione. Cosa sarebbe accaduto se avessi invertito il soggetto e l'oggetto?
+* All'interno del dataset non esiste un collegamento esplicito tra Stanley Kubrick e le case di distribuzione cinematografica con cui ha lavorato, ma lo posso ricavare dall'attraversamento del grafo.
 * Quando vi sono più asserzioni occorre inserire un punto alla fine di ogni tripla.
 
-## Filtri in SPARQL
+## Modificatori e filtri in SPARQL
+[TODO]
+
+### Modificatori: riorganizzare la risposta di una query
+Tra i modificatori che possono essere utilizzati in SPARQL per riorganizzare le risposte di una query vi sono:
+
+* **DISTINCT**. Elimina le righe duplicate ottenute tramite una specifica query.
+* **LIMIT**. Limita il numero di righe che costituiscono la risposta ad una query.
+* **OFFSET**. Consente di recuperare una "fetta" (*slice*) della risposta a partire da una riga specifica. E' utile soprattutto per il *paging* e per gestire il comportamento di default degli endpoint SPARQL che erogano al massimo 10.000 righe per ogni risposta.
+* **ORDER BY**. Riordina le righe della risposta ad una query sulla base di una o più variabili.
+
+``` 
+SELECT DISTINCT ?director ?directorLabel
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> ?director .
+    ?director rdfs:label ?directorLabel .
+} ORDER BY DESC(?directorLabel) LIMIT 50 OFFSET 200
+```
+
+#### Proposta di esercizio
+Provate a modificare le query così come proposto di seguito e verificate come cambia la risposta, verificando se accade ciò che vi aspettate.
+* Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*
+* Che cosa accade cambiando il valore di LIMIT?
+* Osservate che cosa accade cambiando definendo un OFFSET pari a 210.
+
+### Filtri: individuare sottoinsiemi di risultati
 
 ## Operatori in SPARQL
 
@@ -97,6 +122,8 @@ WHERE {
 ## Query avanzate
 
 ### Negazione in una query SPARQL
+
+### SUM e COUNT
 
 ### Query federate: combinare dati provenienti da diversi endpoint
 
