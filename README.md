@@ -54,22 +54,37 @@ All'interno del dataset DBPedia identifica la label (ovvero la stringa human rea
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?label
+SELECT ?label
 WHERE {
-   <http://dbpedia.org/resource/Stanley_Kubrick> rdfs:label ?label .
+   <http://dbpedia.org/resource/Stanley_Kubrick> rdfs:label ?label
 }
 ```
 
 * [Endpoint](http://dbpedia.org/sparql)
 * [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Flabel%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+rdfs%3Alabel+%3Flabel+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
-* [Risultato statico]
 
-#### Informazioni utili
+#### Tips
 * In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o letterale) all'interno del dataset RDF.
 * I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa triple viene rimpiazzata da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
-### Query #2 Pattern multipli per recuperare ulteriori proprietà
+### Query #2 Pattern multipli e attraversamento del grafo
+
+```
+SELECT ?movie ?distributor
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
+    ?movie <http://dbpedia.org/property/distributor> ?distributor .
+}
+```
+
+* [Endpoint](http://dbpedia.org/sparql)
+* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3Fmovie+%3Fdistributor%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
+#### Tips
+* In questo caso la risorsa  <http://dbpedia.org/resource/Stanley_Kubrick> non è il soggetto, ma è l'oggetto dell'asserzione. Cosa sarebbe accaduto se avessi invertito?
+* All'interno del dataset non c'è un collegamento esplicito tra Stanley Kubrick e le case di distribuzione con cui ha lavorato, ma lo posso ricavare dall'attraversamento del grafo.
+* Quando vi sono più asserzioni occorre inserire un punto alla fine di ogni tripla.
 
 ## Filtri in SPARQL
 
