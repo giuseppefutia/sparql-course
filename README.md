@@ -102,7 +102,7 @@ SELECT DISTINCT ?director ?directorLabel
 WHERE {
     ?movie <http://dbpedia.org/ontology/director> ?director .
     ?director rdfs:label ?directorLabel .
-} ORDER BY DESC(?directorLabel) LIMIT 50 OFFSET 200
+} ORDER BY ASC(?directorLabel) LIMIT 50 OFFSET 200
 ```
 
 #### Proposta di esercizio
