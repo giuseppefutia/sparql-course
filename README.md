@@ -108,9 +108,12 @@ WHERE {
 #### Proposta di esercizio
 Provate a modificare le query così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
 
-* Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*
-* Che cosa accade cambiando il valore di LIMIT?
-* Osservate che cosa accade definendo un OFFSET pari a 210.
+1. Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*.
+2. Che cosa accade cambiando il valore di LIMIT?
+3. Osservate che cosa accade definendo un OFFSET pari a 210.
+4. Che cosa accade rimuovendo dalla query la clausola ORDER BY ASC(?directorLabel). Cosa notate? Perché sembra che i concetti vengano replicati su più righe nonostante la parola chiave DISTINCT.
+
+Per ovviare al problema che si verifica nel punto 4, è necessario introdurre il concetto dei filtri.
 
 ### Filtri: individuare sottoinsiemi di risultati
 
