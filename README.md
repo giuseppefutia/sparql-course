@@ -48,7 +48,7 @@ ORDER BY ...
 ## Identificazioni di pattern all'interno di dati RDF
 [TODO]
 
-### Query #1 SELECT, variabili e patter di triple
+### Query #1 Clausola SELECT, variabili e patter di triple
 All'interno del dataset DBPedia identifica le label, ovvero le stringhe human-readble, che sono associate alle risorse in DBpedia. Le label sono associate alle risorse tramite il *predicato rdf:label*  
 
 ```
@@ -65,8 +65,8 @@ WHERE {
 * [Risultato statico]
 
 #### Informazioni utili
-* In SPARQL leveriabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o letterale) all'interno del dataset RDF.
-* I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa tripla viene rimpiazzata da una variable.
+* In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o letterale) all'interno del dataset RDF.
+* I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa triple viene rimpiazzata da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
 ## Filtri in SPARQL
