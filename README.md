@@ -48,7 +48,7 @@ ORDER BY ...
 ## Identificazioni di pattern all'interno di dati RDF
 [TODO]
 
-### Query #1 Clausola SELECT, variabili e patter di triple
+### Query #1 Clausola SELECT, variabili e pattern di triple
 All'interno del dataset DBPedia identifica le label, ovvero le stringhe human-readble, che sono associate alle risorse in DBpedia. Le label sono associate alle risorse tramite il *predicato rdf:label*  
 
 ```
