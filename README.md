@@ -49,25 +49,27 @@ ORDER BY ...
 [TODO]
 
 ### Query #1 Clausola SELECT, variabili e pattern di triple
-All'interno del dataset DBPedia identifica le label, ovvero le stringhe human-readble, che sono associate alle risorse in DBpedia. Le label sono associate alle risorse tramite il *predicato rdf:label*  
+All'interno del dataset DBPedia identifica la label (ovvero la stringa human readable) che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il *predicato rdf:label*  
 
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?subject ?label
+SELECT DISTINCT ?label
 WHERE {
-    ?subject rdfs:label ?label .
-} OFFSET 2000000 LIMIT 20
+   <http://dbpedia.org/resource/Stanley_Kubrick> rdfs:label ?label .
+}
 ```
 
 * [Endpoint](http://dbpedia.org/sparql)
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fsubject+%3Flabel%0D%0AWHERE+%7B%0D%0A++++%3Fsubject+rdfs%3Alabel+%3Flabel+.%0D%0A%7D+OFFSET+2000000+LIMIT+20&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Flabel%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+rdfs%3Alabel+%3Flabel+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 * [Risultato statico]
 
 #### Informazioni utili
 * In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o letterale) all'interno del dataset RDF.
 * I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa triple viene rimpiazzata da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
+
+### Query #2 Pattern multipli per recuperare ulteriori proprietà
 
 ## Filtri in SPARQL
 
