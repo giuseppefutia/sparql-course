@@ -110,7 +110,7 @@ Provate a modificare le query così come proposto di seguito, verificando se la 
 
 * Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*
 * Che cosa accade cambiando il valore di LIMIT?
-* Osservate che cosa accade cambiando definendo un OFFSET pari a 210.
+* Osservate che cosa accade definendo un OFFSET pari a 210.
 
 ### Filtri: individuare sottoinsiemi di risultati
 
