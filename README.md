@@ -49,7 +49,7 @@ ORDER BY ...
 [TODO]
 
 ### Query #1 Clausola SELECT, variabili e pattern di triple
-All'interno del dataset DBPedia identifica la label (ovvero la stringa human readable) che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il *predicato rdf:label*  
+All'interno del dataset DBPedia identifica la label (ovvero la stringa human readable) che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il predicato *rdf:label*  
 
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
