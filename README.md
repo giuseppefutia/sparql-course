@@ -106,7 +106,8 @@ WHERE {
 ```
 
 #### Proposta di esercizio
-Provate a modificare le query così come proposto di seguito e verificate come cambia la risposta, verificando se accade ciò che vi aspettate.
+Provate a modificare le query così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
+
 * Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*
 * Che cosa accade cambiando il valore di LIMIT?
 * Osservate che cosa accade cambiando definendo un OFFSET pari a 210.
