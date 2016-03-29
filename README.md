@@ -7,7 +7,7 @@ All'interno di questo repository viene fornita un'introduzione a SPARQL, protoco
 ## Struttura base di una query SPARQL
 Una query SPARQL prevede nell'ordine:
 
-* Dichiarazione dei prefissi per poter abbreviare gli URI all'interno della queryL.
+* Dichiarazione dei prefissi per poter abbreviare gli URI all'interno della query.
 * Specificazione del grafo RDF sul quale eseguire la query (non strettamente necessario nel caso in cui si volessero interrogare tutti i dati pubblicati sull'endpoint).
 * Definizione dei risultati che voglio ottenere con una query SPARQL.
 * Contruzione della query per individuare informazioni specifiche contenute all'interno del dataset. 
