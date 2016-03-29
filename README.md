@@ -95,7 +95,7 @@ Tra i modificatori che possono essere utilizzati in SPARQL per riorganizzare le 
 * **DISTINCT**. Elimina le righe duplicate ottenute tramite una specifica query.
 * **LIMIT**. Limita il numero di righe che costituiscono la risposta ad una query.
 * **OFFSET**. Consente di recuperare una "fetta" (*slice*) della risposta a partire da una riga specifica. E' utile soprattutto per il *paging* e per gestire il comportamento di default degli endpoint SPARQL che erogano al massimo 10.000 righe per ogni risposta.
-* **ORDER BY**. Riordina le righe della risposta ad una query sulla base di una o più variabili.
+* **ORDER BY**. Riordina le righe della risposta ad una query sulla base di una o più variabili. L'ordinamento può essere ascendente o discendente.
 
 ``` 
 SELECT DISTINCT ?director ?directorLabel
@@ -116,6 +116,28 @@ Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificar
 Per ovviare al problema che si verifica nel punto 4, è necessario introdurre il concetto dei filtri.
 
 ### Filtri: individuare sottoinsiemi di risultati
+Attraverso la parola chiave **FILTER** è possibile stabilire una condizione booleana tramite la quale rimuovere specifiche righe che non mi interessano.
+
+Riprendiamo una query simile alla precedente:
+
+```
+SELECT DISTINCT ?director ?directorLabel
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> ?director .
+    ?director rdfs:label ?directorLabel .
+} LIMIT 50
+```
+
+Proviamo ad aggiungere un filtro sulla lingua e verificare il risultato:
+
+```
+SELECT DISTINCT ?director ?directorLabel
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> ?director .
+    ?director rdfs:label ?directorLabel .
+    FILTER (langMatches(lang(?directorLabel), "EN")) .
+} LIMIT 50
+```
 
 ## Operatori in SPARQL
 
