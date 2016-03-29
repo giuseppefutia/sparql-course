@@ -139,6 +139,14 @@ WHERE {
 } LIMIT 50
 ```
 
+I filtri che sono a disposizione per effettuare le query SPARQL possono essere di diversa natura:
+* Logici: !, &&, ||
+* Matematici: +, -, *, /
+* Comparazione: =, !=, >, <, ...
+* Test: isURI, isBlank, isLiteral, bound
+* Di accesso: str, lang, datatype
+* Altri: sameTerm, langMatches, regex
+
 ## Operatori in SPARQL
 
 ## Requisiti opzionali all'interno delle query
