@@ -106,7 +106,7 @@ WHERE {
 ```
 
 #### Proposta di esercizio
-Provate a modificare le query così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
+Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificarla così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
 
 1. Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*.
 2. Che cosa accade cambiando il valore di LIMIT?
