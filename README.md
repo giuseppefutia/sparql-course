@@ -62,7 +62,7 @@ WHERE {
 }
 ```
 
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Flabel%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+rdfs%3Alabel+%3Flabel+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Flabel%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+rdfs%3Alabel+%3Flabel+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
 * In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o valore letterale) all'interno del dataset RDF.
@@ -79,7 +79,7 @@ WHERE {
 }
 ```
 
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3Fmovie+%3Fdistributor%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3Fmovie+%3Fdistributor%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
 * In questo caso la risorsa  <http://dbpedia.org/resource/Stanley_Kubrick> non è il soggetto, ma è l'oggetto dell'asserzione. Cosa sarebbe accaduto se avessi invertito il soggetto e l'oggetto?
@@ -105,7 +105,7 @@ WHERE {
 } ORDER BY ASC(?directorLabel) LIMIT 50 OFFSET 200
 ```
 
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A%7D+ORDER+BY+ASC%28%3FdirectorLabel%29+LIMIT+50+OFFSET+200&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A%7D+ORDER+BY+ASC%28%3FdirectorLabel%29+LIMIT+50+OFFSET+200&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Proposta di esercizio
 Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificarla così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
@@ -166,7 +166,7 @@ WHERE {
 
 ```
 
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ```
 SELECT DISTINCT ?director ?directorLabel ?quote
@@ -178,7 +178,7 @@ WHERE {
 }
 ```
 
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++OPTIONAL+%7B%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote%7D+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++OPTIONAL+%7B%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote%7D+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
  
 ## ASK, DESCRIBE, CONSTRUCT
 Oltre alla clausola SELECT è possibile specificare altre parole chiave a seconda del risultato che vogliamo ottenere con la nostra query.
@@ -194,7 +194,7 @@ WHERE {
    FILTER(?skBirthDate < ?qtBirthDate) .
 }
 ```
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=ASK%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FQuentin_Tarantino%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FqtBirthDate+.%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FskBirthDate+.%0D%0A+++FILTER%28%3FskBirthDate+%3C+%3FqtBirthDate%29+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=ASK%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FQuentin_Tarantino%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FqtBirthDate+.%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FskBirthDate+.%0D%0A+++FILTER%28%3FskBirthDate+%3C+%3FqtBirthDate%29+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ### DESCRIBE
 Consente di ottenere come risultato un RDF che descrive le risorse specificate. Il server è libero di interpretare una DESCRIBE secondo la propria implementazione, per questi motivi query eseguite su endpoint differenti non sono necessariamente interoperabili. 
@@ -204,15 +204,15 @@ DESCRIBE ?movie {
    ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
 }
 ```
-* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0A%0D%0ADESCRIBE+%3Fmovie+%7B%0D%0A+++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0A%0D%0ADESCRIBE+%3Fmovie+%7B%0D%0A+++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
 * Nel caso in cui non venga definito un prefisso in maniera esplicita, l'endpoint stesso lo crea in automatico utilizzando l'espressione ns\*(namespace + un numero).
 
 ### CONSTRUCT
-A differenza della clausola SELECT che consente di ottenere una tabella con all'interno dei risultati, attraverso una query CONSTRUCT si ottiene un grafo RDF. Tale grafo viene costruito prelevando i dati di interesse tramite un'opportuna ed utilizzando i risultati ottenuti per completare il template definito dalla query CONSTRUCT.
+A differenza della clausola SELECT che consente di ottenere una tabella con all'interno dei risultati, attraverso una query CONSTRUCT si ottiene un grafo RDF. Tale grafo viene costruito prelevando i dati di interesse tramite una query "tradizionale" ed utilizzando i risultati ottenuti per completare il template definito dalla query CONSTRUCT.
 
-Negli esempi precedenti abbiamo visto come la risorsa http://dbpedia.org/resource/Stanley_Kubrick non fosse direttamente alla case di distribuzione dei suoi film. Per questi motivi, potrei creare un grafo in cui rendo esplicito questo collegamento tramite una query CONSTRUCT.
+Negli esempi precedenti abbiamo visto come la risorsa http://dbpedia.org/resource/Stanley_Kubrick non fosse direttamente collegata alle case di distribuzione dei suoi film. Per questi motivi, potrei creare un grafo in cui rendo esplicito questo collegamento tramite una query CONSTRUCT.
 
 ```
 PREFIX mo: <http://myontology.org/>
@@ -225,7 +225,7 @@ WHERE {
     ?movie <http://dbpedia.org/property/distributor> ?distributor .
 }
 ```
-[Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+mo%3A+%3Chttp%3A%2F%2Fmyontology.org%2F%3E%0D%0A%0D%0ACONSTRUCT+%7B+%0D%0A++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+mo%3AworkWithDistributor+%3Fdistributor+.%0D%0A%7D%0D%0AWHERE+%7B+%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+mo%3A+%3Chttp%3A%2F%2Fmyontology.org%2F%3E%0D%0A%0D%0ACONSTRUCT+%7B+%0D%0A++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+mo%3AworkWithDistributor+%3Fdistributor+.%0D%0A%7D%0D%0AWHERE+%7B+%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
 * In questo caso ho costruito una proprietà che non esisteva in precedenza per definire una nuova asserzione.
@@ -235,11 +235,26 @@ WHERE {
 Una query CONSTRUCT può essere utilizzata per modificare il vocabolario attraverso cui definire i predicati. Nel caso della risorsa http://dbpedia.org/resource/Stanley_Kubrick il nome e il cognome del regista vengono definiti in DBpedia tramite la proprietà http://xmlns.com/foaf/0.1/name. Provate ad utilizzare una query CONSTRUCT per costruire un nuovo grafo, scegliendo il predicato corretto definito nell'ontologia https://www.w3.org/TR/vcard-rdf/.
 
 ## Query avanzate
+Combinando gli elementi affrontati sino ad ora è possibile costruire delle query avanzate in grado di sfruttare tutte le potenzialità di SPARQL e dei Linked Data.
 
 ### Negazione in una query SPARQL
+La negazione consente di sfruttare triple esistente per filtrare il risultato. In questo caso voglio ottenere tutti i film diretti da Stanley Kubrick che hanno una casa di distribuzione diversa da quella che ha distribuito il film Blade Runner.
+
+```
+SELECT DISTINCT ?movie
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
+    ?movie <http://dbpedia.org/property/distributor> ?distributor .
+    OPTIONAL {<http://dbpedia.org/resource/Blade_Runner> <http://dbpedia.org/property/distributor> ?badDistributor . FILTER (?distributor = ?badDistributor) .} .
+    FILTER ( !BOUND(?badDistributor) )
+}
+```
+[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ### SUM e COUNT
 
 ### Query federate: combinare dati provenienti da diversi endpoint
 
 ## Contatti
+* Linkedin: https://it.linkedin.com/in/giuseppefutia
+* Twitter: https://twitter.com/giuseppe_futia
