@@ -109,7 +109,7 @@ Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificar
 1. Che cosa accade se rimuovo il modificatore DISTINCT? Perché secondo voi la risposta viene replicata? Per capirlo meglio, provate ad aggiungere la variabile *?movie* nella clausola SELECT della query: *SELECT ?movie ?director ?directorLabel*.
 2. Che cosa accade cambiando il valore di LIMIT?
 3. Osservate che cosa accade definendo un OFFSET pari a 210.
-4. Che cosa accade rimuovendo dalla query la clausola ORDER BY ASC(?directorLabel). Cosa notate? Perché sembra che i concetti vengano replicati su più righe nonostante la parola chiave DISTINCT.
+4. Inserite nuovamente il modificatore DISTINCT e rimuovete dalla query la clausola ORDER BY ASC(?directorLabel). Cosa notate? Perché sembra che i concetti vengano replicati su più righe nonostante la parola chiave DISTINCT.
 
 Per ovviare al problema che si verifica nel punto 4, è necessario introdurre il concetto dei filtri.
 
@@ -203,10 +203,31 @@ DESCRIBE ?movie {
 * [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0A%0D%0ADESCRIBE+%3Fmovie+%7B%0D%0A+++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
-* Nel caso in cui non venga definito un prefisso in maniera esplicita, l'endpoint stesso lo crea in automatico utilizzando l'espressione ns\*(namespace + un numero di riferimento).
+* Nel caso in cui non venga definito un prefisso in maniera esplicita, l'endpoint stesso lo crea in automatico utilizzando l'espressione ns\*(namespace + un numero).
 
 ### CONSTRUCT
+A differenza della clausola SELECT che consente di ottenere una tabella con all'interno dei risultati, attraverso una query CONSTRUCT si ottiene un grafo RDF. Tale grafo viene costruito prelevando i dati di interesse tramite un'opportuna ed utilizzando i risultati ottenuti per completare il template definito dalla query CONSTRUCT.
 
+Negli esempi precedenti abbiamo visto come la risorsa http://dbpedia.org/resource/Stanley_Kubrick non fosse direttamente alla case di distribuzione dei suoi film. Per questi motivi, potrei creare un grafo in cui rendo esplicito questo collegamento tramite una query CONSTRUCT.
+
+```
+PREFIX mo: <http://myontology.org/>
+
+CONSTRUCT { 
+  <http://dbpedia.org/resource/Stanley_Kubrick> mo:workWithDistributor ?distributor .
+}
+WHERE { 
+    ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
+    ?movie <http://dbpedia.org/property/distributor> ?distributor .
+}
+```
+
+#### Tips
+* In questo caso ho costruito una proprietà che non esisteva in precedenza per definire una nuova asserzione.
+* Il grafo ottenuto tramite la query CONSTRUCT è creato in locale e dunque non vengono effettivamente pubblicate nuove triple sull'endpoint.
+
+#### Proposta di esercizio
+Una query CONSTRUCT può essere utilizzata per modificare il vocabolario attraverso cui definire i predicati. Nel caso della risorsa http://dbpedia.org/resource/Stanley_Kubrick il nome e il cognome del regista vengono definiti in DBpedia tramite la proprietà http://xmlns.com/foaf/0.1/name. Provate ad utilizzare una query CONSTRUCT per costruire un nuovo grafo, scegliendo il predicato corretto definito nell'ontologia https://www.w3.org/TR/vcard-rdf/.
 
 ## Query avanzate
 
