@@ -246,7 +246,7 @@ WHERE {
     FILTER ( !BOUND(?badDistributor) )
 }
 ```
-[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ### SUM e COUNT
 
