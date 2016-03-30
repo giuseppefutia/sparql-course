@@ -48,7 +48,7 @@ ORDER BY ...
 ## Identificazioni di pattern all'interno di dati RDF
 [TODO]
 
-### Query #1 Clausola SELECT, variabili e pattern di triple
+### Clausola SELECT, variabili e pattern di triple
 All'interno del dataset DBPedia identifica la label (ovvero la stringa human readable) che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il predicato *rdf:label*  
 
 ```
@@ -67,7 +67,7 @@ WHERE {
 * I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa triple viene rimpiazzata da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
-### Query #2 Pattern multipli e attraversamento del grafo
+### Pattern multipli e attraversamento del grafo
 
 ```
 SELECT ?movie ?distributor
