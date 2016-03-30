@@ -176,7 +176,8 @@ WHERE {
 
 * [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++OPTIONAL+%7B%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote%7D+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
  
-## Costrutti in SPARQL: ASK, DESCRIBE, CONSTRUCT
+## ASK, DESCRIBE, CONSTRUCT
+Oltre alla clausola SELECT è possibile specificare altre parole chiave a seconda del risultato che vogliamo ottenere con la nostra query.
 
 ### ASK
 Consente di ottenere una risposta booleana a partire dalla query specificata
@@ -190,6 +191,22 @@ WHERE {
 }
 ```
 * [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=ASK%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FQuentin_Tarantino%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FqtBirthDate+.%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2FbirthDate%3E+%3FskBirthDate+.%0D%0A+++FILTER%28%3FskBirthDate+%3C+%3FqtBirthDate%29+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
+### DESCRIBE
+Consente di ottenere come risultato un RDF che descrive le risorse specificate. Il server è libero di interpretare una DESCRIBE secondo la propria implementazione, per questi motivi query eseguite su endpoint differenti non sono necessariamente interoperabili. 
+
+```
+DESCRIBE ?movie {
+   ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
+}
+```
+* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0A%0D%0ADESCRIBE+%3Fmovie+%7B%0D%0A+++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
+#### Tips
+* Nel caso in cui non venga definito un prefisso in maniera esplicita, l'endpoint stesso lo crea in automatico utilizzando l'espressione ns\*(namespace + un numero di riferimento).
+
+### CONSTRUCT
+
 
 ## Query avanzate
 
