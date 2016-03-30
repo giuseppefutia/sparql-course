@@ -249,6 +249,33 @@ WHERE {
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ### SUM e COUNT
+Per mostrare le potenzialità di SPARQL per la gestione di somme e conteggi numerici verranno eseguite query SPARQL sul repository RDF costruito a partire dai dati dei contratti pubblici italiani (http://public-contracts.nexacenter.org/). L'enpoint SPQARQL è disponibile all'indirizzo: http://public-contracts.nexacenter.org/sparql. 
+
+La query seguente mostra l'ammontare ricevuto nell'ambito di contratti pubblici dall'azienda identificata con la partita IVA 04145300010.
+
+```
+PREFIX pc: <http://purl.org/procurement/public-contracts#>
+PREFIX payment: <http://reference.data.gov.uk/def/payment#>
+
+SELECT SUM(?amount) as ?paidTotal ?company
+WHERE {
+    SELECT DISTINCT ?contract ?amount ?company
+    WHERE {
+        ?company <http://purl.org/goodrelations/v1#vatID> "04145300010".
+        ?bid pc:bidder ?company .
+        ?contract pc:awardedTender ?bid .
+        ?contract payment:payment ?payment . 
+        ?payment payment:netAmount ?amount .
+    }
+}
+```
+* [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0A%0D%0ASELECT+SUM%28%3Famount%29+as+%3FpaidTotal+%3Fcompany%0D%0AWHERE+%7B%0D%0A++++SELECT+DISTINCT+%3Fcontract+%3Famount+%3Fcompany%0D%0A++++WHERE+%7B%0D%0A++++++++%3Fcompany+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2204145300010%22.%0D%0A++++++++%3Fbid+pc%3Abidder+%3Fcompany+.%0D%0A++++++++%3Fcontract+pc%3AawardedTender+%3Fbid+.%0D%0A++++++++%3Fcontract+payment%3Apayment+%3Fpayment+.+%0D%0A++++++++%3Fpayment+payment%3AnetAmount+%3Famount+.%0D%0A++++%7D%0D%0A%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on).
+
+#### Tips
+* [TODO] Spiegazione relativa alle query annidate.
+
+#### Proposta di esercizio
+* Individuare la somma erogata da una pubblica amministrazione italiana nell'ambito dei contratti pubblici.
 
 ### Query federate: combinare dati provenienti da diversi endpoint
 
