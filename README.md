@@ -42,7 +42,7 @@ ORDER BY ...
 * DBpedia ([sito del progetto](http://dbpedia.org/), [endpoint SPARQL](http://dbpedia.org/sparql)).
 * DBpedia Italia ([sito del progetto](http://it.dbpedia.org/), [endpoint SPARQL](http://it.dbpedia.org/sparql)).
 
-DBpedia è un progetto che ha l'obiettivo di pubblicare secondo il modello RDF le informazioni prevenienti da  Wikipedia. DBpedia include dati estratti in automatico dalle infobox, dalla gerarchia di categorie, dagli abstract degli articoli e da fonti esterne.
+DBpedia è un progetto che ha l'obiettivo di pubblicare secondo il modello RDF le informazioni provenienti da  Wikipedia. DBpedia include dati estratti in automatico dalle infobox, dalla gerarchia di categorie, dagli abstract degli articoli e da fonti esterne.
 
 ## Identificazioni di pattern all'interno di dati RDF
 [TODO]
