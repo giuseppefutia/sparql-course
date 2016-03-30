@@ -3,9 +3,6 @@ All'interno di questo repository viene fornita un'introduzione a SPARQL, protoco
 
 Per proporre modifiche ed arricchire questo repository potete utilizzare il [meccanismo delle pull-request offerto da GitHub](https://help.github.com/articles/using-pull-requests/).
 
-## Introduzione
-[TODO]
-
 ## Architettura ed endpoint SPARQL
 * Le query SPARQL vengono eseguite su dataset pubblicati secondo il modello RDF. 
 * Un endpoint SPARQL è in grado di accettare ed eseguire query i cui risultati sono disponibili via HTTP.
