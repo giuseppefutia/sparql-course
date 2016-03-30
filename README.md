@@ -11,7 +11,7 @@ Per proporre modifiche ed arricchire questo repository potete utilizzare il [mec
     * **XML**. SPARQL prevede uno specifico vocabolario per ottenere i risultati sotto forma di tabelle.
     * **JSON**. Questo formato consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in NoSQL database.
     * **RDF**. Attraverso query di tipo CONSTRUCT si ottengo dati in RDF, serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
-    * **HTML**. Utilizzato in particolar modo nel caso in cui le query SPARQL vengano gestite tramite un form. In genere la risposta in formato HTML viene implementata applicando un XLS per trasfomrare i risultati dal formato XML.
+    * **HTML**. Utilizzato in particolar modo nel caso in cui le query SPARQL vengano gestite tramite un form. In genere la risposta in formato HTML viene implementata applicando un XLS per trasformare i risultati dal formato XML.
 
 ## Struttura base di una query SPARQL
 Una query SPARQL prevede nell'ordine:
