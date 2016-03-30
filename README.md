@@ -9,9 +9,9 @@ Per proporre modifiche ed arricchire questo repository potete utilizzare il [mec
     * A seconda delle impostazioni definite sugli endpoint, è possibile interrogare e combinare tra loro dati appartenenti a dataset differenti.
 * I risultati di una query SPARQL possono essere "renderizzati" secondo diversi formati.
     * **XML**. SPARQL prevede uno specifico vocabolario per ottenere i risultati sotto forma di tabelle.
-    * **JSON**. Consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in database quali MongoDB.
-    * **RDF**. Per specifici risultati dell'endpoint (costruiti tramite query CONSTRUCT) si ottengono dati in RDF serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
-    * **HTML**. Quando viene utilizzato un form per gestire le query SPARQL. In genere viene implementato applicando un XLS per trasfomrare i risultati dal formato XML.
+    * **JSON**. Questo formato consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in NoSQL database.
+    * **RDF**. Attraverso query di tipo CONSTRUCT si ottengo dati in RDF, serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
+    * **HTML**. Utilizzato in particolar modo nel caso in cui le query SPARQL vengano gestite tramite un form. In genere la risposta in formato HTML viene implementata applicando un XLS per trasfomrare i risultati dal formato XML.
 
 ## Struttura base di una query SPARQL
 Una query SPARQL prevede nell'ordine:
@@ -20,7 +20,7 @@ Una query SPARQL prevede nell'ordine:
 * Specificazione del grafo RDF sul quale eseguire la query (non strettamente necessario nel caso in cui si volessero interrogare tutti i dati pubblicati sull'endpoint).
 * Definizione dei risultati che voglio ottenere con una query SPARQL.
 * Contruzione della query per individuare informazioni specifiche contenute all'interno del dataset. 
-* Inserimento di modificatori per riorganizzare, suddividere, riordinare, ecc. il risultato della query.
+* Inserimento di modificatori per riorganizzare, suddividere e riordinare il risultato della query.
 
 ```
 # dichiarazione dei prefissi
@@ -63,7 +63,7 @@ WHERE {
 
 #### Tips
 * In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o valore letterale) all'interno del dataset RDF.
-* I pattern definiti nella query sono effettivamente delle triple, eccetto per il fatto che una parte di questa triple viene rimpiazzata da una variable.
+* I pattern definiti nella query sono triple in cui uno o più elementi vengono rimpiazzati da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
 ### Pattern multipli e attraversamento del grafo
@@ -89,7 +89,7 @@ WHERE {
 ### Modificatori: riorganizzare la risposta di una query
 Tra i modificatori che possono essere utilizzati in SPARQL per riorganizzare le risposte di una query vi sono:
 
-* **DISTINCT**. Elimina le righe duplicate ottenute tramite una specifica query.
+* **DISTINCT**. Elimina le occorrenze duplicate di uno o più parametri ottenute tramite una specifica query.
 * **LIMIT**. Limita il numero di righe che costituiscono la risposta ad una query.
 * **OFFSET**. Consente di recuperare una "fetta" (*slice*) della risposta a partire da una riga specifica. E' utile soprattutto per il *paging* e per gestire il comportamento di default degli endpoint SPARQL che erogano al massimo 10.000 righe per ogni risposta.
 * **ORDER BY**. Riordina le righe della risposta ad una query sulla base di una o più variabili. L'ordinamento può essere ascendente o discendente.
@@ -115,7 +115,7 @@ Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificar
 Per ovviare al problema che si verifica nel punto 4, è necessario introdurre il concetto dei filtri.
 
 ### Filtri: individuare sottoinsiemi di risultati
-Attraverso la parola chiave **FILTER** è possibile stabilire una condizione booleana tramite la quale rimuovere specifiche righe che non mi interessano.
+Attraverso la parola chiave **FILTER** è possibile stabilire una condizione booleana tramite la quale filtrare i risultati presenti all'interno della risposta.
 
 Riprendiamo una query simile alla precedente:
 
