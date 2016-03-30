@@ -42,8 +42,10 @@ ORDER BY ...
 ```
 
 ## Dataset di riferimento
-* DBpedia (sito del progetto, endpoint SPARQL)
-* DBpedia Italia (sito del progetto, endpoint SPARQL)
+* DBpedia ([sito del progetto](http://dbpedia.org/), [endpoint SPARQL](http://dbpedia.org/sparql)).
+* DBpedia Italia ([sito del progetto](http://it.dbpedia.org/), [endpoint SPARQL](http://it.dbpedia.org/sparql)).
+
+DBpedia è un progetto che ha l'obiettivo di pubblicare secondo il modello RDF le informazioni prevenienti da  Wikipedia. DBpedia include dati estratti in automatico dalle infobox, dalla gerarchia di categorie, dagli abstract degli articoli e da fonti esterne.
 
 ## Identificazioni di pattern all'interno di dati RDF
 [TODO]
@@ -102,6 +104,8 @@ WHERE {
     ?director rdfs:label ?directorLabel .
 } ORDER BY ASC(?directorLabel) LIMIT 50 OFFSET 200
 ```
+
+* [Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A%7D+ORDER+BY+ASC%28%3FdirectorLabel%29+LIMIT+50+OFFSET+200&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Proposta di esercizio
 Provate ad eseguire la query sull'endpoint http://dbpedia.org/sparql e modificarla così come proposto di seguito, verificando se la risposta si modifica secondo ciò che vi aspettate.
