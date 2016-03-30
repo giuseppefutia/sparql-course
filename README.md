@@ -221,6 +221,7 @@ WHERE {
     ?movie <http://dbpedia.org/property/distributor> ?distributor .
 }
 ```
+[Risultato dall'endpoint](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+mo%3A+%3Chttp%3A%2F%2Fmyontology.org%2F%3E%0D%0A%0D%0ACONSTRUCT+%7B+%0D%0A++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+mo%3AworkWithDistributor+%3Fdistributor+.%0D%0A%7D%0D%0AWHERE+%7B+%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A%7D&format=text%2Fturtle&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
 * In questo caso ho costruito una proprietà che non esisteva in precedenza per definire una nuova asserzione.
