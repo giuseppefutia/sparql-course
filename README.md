@@ -284,9 +284,6 @@ WHERE {
 ```
 * [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0A%0D%0ASELECT+SUM%28%3Famount%29+as+%3FpaidTotal+%3Fcompany%0D%0AWHERE+%7B%0D%0A++++SELECT+DISTINCT+%3Fcontract+%3Famount+%3Fcompany%0D%0A++++WHERE+%7B%0D%0A++++++++%3Fcompany+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2204145300010%22.%0D%0A++++++++%3Fbid+pc%3Abidder+%3Fcompany+.%0D%0A++++++++%3Fcontract+pc%3AawardedTender+%3Fbid+.%0D%0A++++++++%3Fcontract+payment%3Apayment+%3Fpayment+.+%0D%0A++++++++%3Fpayment+payment%3AnetAmount+%3Famount+.%0D%0A++++%7D%0D%0A%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on).
 
-#### Proposta di esercizio
-* Individuare la somma erogata da una pubblica amministrazione italiana nell'ambito dei contratti pubblici.
-
 ### Query federate: combinare dati provenienti da diversi endpoint
 La potenzialità dei Linked Data risiede nel fatto che è possibile combinare tra loro dati provenienti da endpoint differenti. Ad esempio è possibile individuare la PEC di una pubblica amministrazione presente del dataset dei contratti pubblici interrogando il repository [SPCDATA](http://spcdata.digitpa.gov.it/index.html).
 
