@@ -11,7 +11,7 @@ Per proporre modifiche ed arricchire questo repository potete utilizzare il [mec
     * **XML**. SPARQL prevede uno specifico vocabolario per ottenere i risultati sotto forma di tabelle.
     * **JSON**. Questo formato consiste in un *porting* del vocabolario XML definito in SPARQL. Recentemente si sta affermando un formato chiamato [JSON-LD](http://json-ld.org/), che risulta molto più leggibile per gli esseri umani e si presta ad essere facilmente utilizzabile nell'ambito di servizi REST e per importare dati in NoSQL database.
     * **RDF**. Attraverso query di tipo CONSTRUCT si ottengo dati in RDF, serializzabili in diversi formati (RDF/XML, N-Triples, Turtle, ecc.).
-    * **HTML**. Utilizzato in particolar modo nel caso in cui le query SPARQL vengano gestite tramite un form. In genere la risposta in formato HTML viene implementata applicando un XLS per trasformare i risultati dal formato XML.
+    * **HTML**. Utilizzato in particolar modo nel caso in cui le query SPARQL vengano gestite tramite un form. In genere la risposta in formato HTML viene implementata applicando un XLS per trasformare i risultatconi dal formato XML.
 
 ## Struttura base di una query SPARQL
 Una query SPARQL prevede nell'ordine:
@@ -19,7 +19,7 @@ Una query SPARQL prevede nell'ordine:
 * Dichiarazione dei prefissi per poter abbreviare gli URI all'interno della query.
 * Specificazione del grafo RDF sul quale eseguire la query (non strettamente necessario nel caso in cui si volessero interrogare tutti i dati pubblicati sull'endpoint).
 * Definizione dei risultati che voglio ottenere con una query SPARQL.
-* Contruzione della query per individuare informazioni specifiche contenute all'interno del dataset. 
+* Costruzione della query per individuare informazioni specifiche contenute all'interno del dataset. 
 * Inserimento di modificatori per riorganizzare, suddividere e riordinare il risultato della query.
 
 ```
@@ -48,7 +48,7 @@ DBpedia è un progetto che ha l'obiettivo di pubblicare secondo il modello RDF l
 [TODO]
 
 ### Clausola SELECT, variabili e pattern di triple
-All'interno del dataset DBPedia identifica la label (ovvero la stringa human readable) che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il predicato *rdfs:label*  
+All'interno del dataset DBPedia identifica la label (ovvero la stringa "human readable") che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il predicato *rdfs:label*  
 
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -62,7 +62,7 @@ WHERE {
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Flabel%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+rdfs%3Alabel+%3Flabel+.%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 #### Tips
-* In SPARQL le variabili vengono definite con un punto interrogativo (?) e "matchano" qualsiasi tipo di nodo (risorsa o valore letterale) all'interno del dataset RDF.
+* In SPARQL le variabili vengono definite con un punto interrogativo (?) e includono qualsiasi tipo di nodo (risorsa o valore letterale) all'interno del dataset RDF.
 * I pattern definiti nella query sono triple in cui uno o più elementi vengono rimpiazzati da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
@@ -91,7 +91,7 @@ Tra i modificatori che possono essere utilizzati in SPARQL per riorganizzare le 
 
 * **DISTINCT**. Elimina le occorrenze duplicate di uno o più parametri ottenute tramite una specifica query.
 * **LIMIT**. Limita il numero di righe che costituiscono la risposta ad una query.
-* **OFFSET**. Consente di recuperare una "fetta" (*slice*) della risposta a partire da una riga specifica. E' utile soprattutto per il *paging* e per gestire il comportamento di default degli endpoint SPARQL che erogano al massimo 10.000 righe per ogni risposta.
+* **OFFSET**. Consente di recuperare una "fetta" (*slice*) della risposta a partire da una riga specifica. E' utile soprattutto per il "paging" e per gestire il comportamento di default degli endpoint SPARQL che erogano al massimo 10.000 righe per ogni risposta.
 * **ORDER BY**. Riordina le righe della risposta ad una query sulla base di una o più variabili. L'ordinamento può essere ascendente o discendente.
 
 ``` 
@@ -181,7 +181,7 @@ WHERE {
 Oltre alla clausola SELECT è possibile specificare altre parole chiave a seconda del risultato che vogliamo ottenere con la nostra query.
 
 ### ASK
-Consente di ottenere una risposta booleana a partire dalla query specificata
+Consente di ottenere una risposta booleana a partire dalla query specificata.
 
 ```
 ASK
