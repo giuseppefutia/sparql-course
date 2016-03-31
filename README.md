@@ -65,6 +65,9 @@ WHERE {
 * I pattern definiti nella query sono triple in cui uno o più elementi vengono rimpiazzati da una variable.
 * La clausola SELECT consente di ottenere una tabella con i valori che soddisfano le richieste della query.
 
+#### Proposta di esercizio
+* Provate ad individuare tutte le proprietà, e il valore di tali proprietà, che sono collegate alla risorsa <http://dbpedia.org/resource/Stanley_Kubrick>.
+
 ### Pattern multipli e attraversamento del grafo
 
 ```
@@ -81,6 +84,9 @@ WHERE {
 * In questo caso la risorsa  <http://dbpedia.org/resource/Stanley_Kubrick> non è il soggetto, ma è l'oggetto dell'asserzione. Cosa sarebbe accaduto se avessi invertito il soggetto e l'oggetto?
 * All'interno del dataset non esiste un collegamento esplicito tra Stanley Kubrick e le case di distribuzione cinematografica con cui ha lavorato, ma lo posso ricavare dall'attraversamento del grafo.
 * Quando vi sono più asserzioni occorre inserire un punto alla fine di ogni tripla.
+
+#### Proposta di esercizio
+* Provate ad aggiungere alla query precedente gli elementi necessari per individuare i fondatori e la data di fondazione della casa di distribuzione.
 
 ## Modificatori e filtri in SPARQL
 
@@ -125,6 +131,8 @@ WHERE {
 } LIMIT 50
 ```
 
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fdirector+%3FdirectorLabel%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A%7D+LIMIT+50%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
 Proviamo ad aggiungere un filtro sulla lingua e verificare il risultato:
 
 ```
@@ -135,6 +143,8 @@ WHERE {
     FILTER (langMatches(lang(?directorLabel), "EN")) .
 } LIMIT 50
 ```
+
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fdirector+%3FdirectorLabel%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A%7D+LIMIT+50%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 I filtri che sono a disposizione per effettuare le query SPARQL possono essere di diversa natura:
 * **Logici**: !, &&, ||
@@ -158,7 +168,6 @@ WHERE {
     ?director <http://dbpedia.org/property/quote> ?quote . 
     FILTER (langMatches(lang(?directorLabel), "EN")) .
 }
-
 ```
 
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
@@ -174,6 +183,9 @@ WHERE {
 ```
 
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fdirector+%3FdirectorLabel+%3Fquote%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Fdirector+.%0D%0A++++%3Fdirector+rdfs%3Alabel+%3FdirectorLabel+.%0D%0A++++OPTIONAL+%7B%3Fdirector+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fquote%3E+%3Fquote%7D+.+%0D%0A++++FILTER+%28langMatches%28lang%28%3FdirectorLabel%29%2C+%22EN%22%29%29+.%0D%0A%7D%0D%0A&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
+### Proposta di esercizio
+* Per ogni regista, individuare anche i film di cui è stato produttore come parametro opzionale.
  
 ## ASK, DESCRIBE, CONSTRUCT
 Oltre alla clausola SELECT è possibile specificare altre parole chiave a seconda del risultato che vogliamo ottenere con la nostra query.
@@ -246,6 +258,9 @@ WHERE {
 ```
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
+#### Proposta di esercizio
+* Individuare tutti i film di Stanley Kubrick in cui il compositore NON è Wendy Carlos (http://dbpedia.org/resource/Wendy_Carlos)
+
 ### SUM
 Per mostrare le potenzialità di SPARQL per la gestione delle somme viene proposta una query SPARQL sul repository RDF costruito a partire dai dati dei contratti pubblici italiani (http://public-contracts.nexacenter.org/). L'enpoint SPQARQL è disponibile all'indirizzo: http://public-contracts.nexacenter.org/sparql. 
 
@@ -268,9 +283,6 @@ WHERE {
 }
 ```
 * [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0A%0D%0ASELECT+SUM%28%3Famount%29+as+%3FpaidTotal+%3Fcompany%0D%0AWHERE+%7B%0D%0A++++SELECT+DISTINCT+%3Fcontract+%3Famount+%3Fcompany%0D%0A++++WHERE+%7B%0D%0A++++++++%3Fcompany+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2204145300010%22.%0D%0A++++++++%3Fbid+pc%3Abidder+%3Fcompany+.%0D%0A++++++++%3Fcontract+pc%3AawardedTender+%3Fbid+.%0D%0A++++++++%3Fcontract+payment%3Apayment+%3Fpayment+.+%0D%0A++++++++%3Fpayment+payment%3AnetAmount+%3Famount+.%0D%0A++++%7D%0D%0A%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on).
-
-#### Tips
-* [TODO] Spiegazione relativa alle query annidate.
 
 #### Proposta di esercizio
 * Individuare la somma erogata da una pubblica amministrazione italiana nell'ambito dei contratti pubblici.
