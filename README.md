@@ -45,7 +45,6 @@ ORDER BY ...
 DBpedia è un progetto che ha l'obiettivo di pubblicare secondo il modello RDF le informazioni provenienti da  Wikipedia. DBpedia include dati estratti in automatico dalle infobox, dalla gerarchia di categorie, dagli abstract degli articoli e da fonti esterne.
 
 ## Identificazioni di pattern all'interno di dati RDF
-[TODO]
 
 ### Clausola SELECT, variabili e pattern di triple
 All'interno del dataset DBPedia identifica la label (ovvero la stringa "human readable") che si riferisce alla risorsa http://dbpedia.org/page/Stanley_Kubrick. Generalmente le label sono associate alle risorse tramite il predicato *rdfs:label*  
@@ -84,7 +83,6 @@ WHERE {
 * Quando vi sono più asserzioni occorre inserire un punto alla fine di ogni tripla.
 
 ## Modificatori e filtri in SPARQL
-[TODO]
 
 ### Modificatori: riorganizzare la risposta di una query
 Tra i modificatori che possono essere utilizzati in SPARQL per riorganizzare le risposte di una query vi sono:
@@ -248,8 +246,8 @@ WHERE {
 ```
 * [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+DISTINCT+%3Fmovie%0D%0AWHERE+%7B%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2Fdirector%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FStanley_Kubrick%3E+.%0D%0A++++%3Fmovie+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3Fdistributor+.%0D%0A++++OPTIONAL+%7B%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBlade_Runner%3E+%3Chttp%3A%2F%2Fdbpedia.org%2Fproperty%2Fdistributor%3E+%3FbadDistributor+.+FILTER+%28%3Fdistributor+%3D+%3FbadDistributor%29+.%7D+.%0D%0A++++FILTER+%28+%21BOUND%28%3FbadDistributor%29+%29%0D%0A%7D&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
-### SUM e COUNT
-Per mostrare le potenzialità di SPARQL per la gestione di somme e conteggi numerici verranno eseguite query SPARQL sul repository RDF costruito a partire dai dati dei contratti pubblici italiani (http://public-contracts.nexacenter.org/). L'enpoint SPQARQL è disponibile all'indirizzo: http://public-contracts.nexacenter.org/sparql. 
+### SUM
+Per mostrare le potenzialità di SPARQL per la gestione delle somme viene proposta una query SPARQL sul repository RDF costruito a partire dai dati dei contratti pubblici italiani (http://public-contracts.nexacenter.org/). L'enpoint SPQARQL è disponibile all'indirizzo: http://public-contracts.nexacenter.org/sparql. 
 
 La query seguente mostra l'ammontare ricevuto nell'ambito di contratti pubblici dall'azienda identificata con la partita IVA 04145300010.
 
@@ -278,6 +276,32 @@ WHERE {
 * Individuare la somma erogata da una pubblica amministrazione italiana nell'ambito dei contratti pubblici.
 
 ### Query federate: combinare dati provenienti da diversi endpoint
+La potenzialità dei Linked Data risiede nel fatto che è possibile combinare tra loro dati provenienti da endpoint differenti. Ad esempio è possibile individuare la PEC di una pubblica amministrazione presente del dataset dei contratti pubblici interrogando il repository [SPCDATA](http://spcdata.digitpa.gov.it/index.html).
+
+```
+PREFIX gr:<http://purl.org/goodrelations/v1#>
+PREFIX pc: <http://purl.org/procurement/public-contracts#>
+PREFIX payment: <http://reference.data.gov.uk/def/payment#>
+PREFIX spc: <http://spcdata.digitpa.gov.it/>
+
+SELECT ?label SUM(?amount) as ?paidAmounts ?officialEmail
+WHERE {
+SELECT DISTINCT *
+WHERE {
+ ?contractingAutority <http://purl.org/goodrelations/v1#vatID> "00518460019".
+ ?contractingAutority rdfs:label ?label.
+ ?contractingAutority owl:sameAs ?uriSpc.
+  SERVICE <http://spcdata.digitpa.gov.it:8899/sparql> { 
+  OPTIONAL { ?uriSpc spc:PEC ?officialEmail.} 
+  }
+ ?contract pc:contractingAutority  ?contractingAutority.
+ ?contract payment:payment ?payment.
+ ?payment payment:netAmount ?amount.
+} ORDER BY ?contract
+} 
+```
+* [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+gr%3A%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23%3E%0D%0APREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+spc%3A+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%2F%3E%0D%0A%0D%0ASELECT+%3Flabel+SUM%28%3Famount%29+as+%3FpaidAmounts+%3FofficialEmail%0D%0AWHERE+%7B%0D%0ASELECT+DISTINCT+*%0D%0AWHERE+%7B%0D%0A+%3FcontractingAutority+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2200518460019%22.%0D%0A+%3FcontractingAutority+rdfs%3Alabel+%3Flabel.%0D%0A+%3FcontractingAutority+owl%3AsameAs+%3FuriSpc.%0D%0A++SERVICE+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%3A8899%2Fsparql%3E+%7B+%0D%0A++OPTIONAL+%7B+%3FuriSpc+spc%3APEC+%3FofficialEmail.%7D+%0D%0A++%7D%0D%0A+%3Fcontract+pc%3AcontractingAutority++%3FcontractingAutority.%0D%0A+%3Fcontract+payment%3Apayment+%3Fpayment.%0D%0A+%3Fpayment+payment%3AnetAmount+%3Famount.%0D%0A%7D+ORDER+BY+%3Fcontract%0D%0A%7D+&should-sponge=&format=text%2Fhtml&timeout=0&debug=on)
+
 
 ## Contatti
 * Linkedin: https://it.linkedin.com/in/giuseppefutia
