@@ -88,6 +88,25 @@ WHERE {
 #### Proposta di esercizio
 * Provate ad aggiungere alla query precedente gli elementi necessari per individuare i fondatori e la data di fondazione della casa di distribuzione.
 
+#### Soluzioni
+Una possibile soluzione è quella proposta da uno studente del corso, Marco Micotti. Utilizzando la clausola UNION è possibile estrarre le informazioni richieste a partire dalle case di distribuzione in DBpedia, che sono collegate a predicati diversi per esprimere le informazioni riguardanti i fondatori e le date di fondazione.
+
+```
+SELECT ?movie ?distributor ?founder ?founddate
+WHERE {
+    ?movie <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick> .
+    ?movie <http://dbpedia.org/property/distributor> ?distributor .
+    {?distributor <http://dbpedia.org/ontology/foundedBy> ?founder.
+     ?distributor <http://dbpedia.org/ontology/foundingDate> ?founddate.}
+    UNION 
+    {{?distributor <http://dbpedia.org/property/founders> ?founder .}
+      UNION
+      {?distributor <http://dbpedia.org/property/founder> ?founder .
+      }
+     ?distributor <http://dbpedia.org/property/foundation> ?founddate .}
+}
+```
+
 ## Modificatori e filtri in SPARQL
 
 ### Modificatori: riorganizzare la risposta di una query
