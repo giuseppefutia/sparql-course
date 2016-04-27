@@ -329,6 +329,9 @@ WHERE {
    } 
 ```
 * [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+gr%3A%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23%3E%0D%0APREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+spc%3A+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%2F%3E%0D%0A%0D%0ASELECT+%3Flabel+SUM%28%3Famount%29+as+%3FpaidAmounts+%3FofficialEmail%0D%0AWHERE+%7B%0D%0ASELECT+DISTINCT+*%0D%0AWHERE+%7B%0D%0A+%3FcontractingAutority+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2200518460019%22.%0D%0A+%3FcontractingAutority+rdfs%3Alabel+%3Flabel.%0D%0A+%3FcontractingAutority+owl%3AsameAs+%3FuriSpc.%0D%0A++SERVICE+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%3A8899%2Fsparql%3E+%7B+%0D%0A++OPTIONAL+%7B+%3FuriSpc+spc%3APEC+%3FofficialEmail.%7D+%0D%0A++%7D%0D%0A+%3Fcontract+pc%3AcontractingAutority++%3FcontractingAutority.%0D%0A+%3Fcontract+payment%3Apayment+%3Fpayment.%0D%0A+%3Fpayment+payment%3AnetAmount+%3Famount.%0D%0A%7D+ORDER+BY+%3Fcontract%0D%0A%7D+&should-sponge=&format=text%2Fhtml&timeout=0&debug=on)
+* 
+## GeoSPARQL
+[TODO]
 
 
 ## Contatti
