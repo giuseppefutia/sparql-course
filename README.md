@@ -349,6 +349,21 @@ Riprendendo ad esempio il caso dei toponimi, potremmo modellare i dati come segu
 * Definizione dell'entità toponimo: http://toponomastica.piemonte.it/id/toponimi/370976.
 * Definizione del predicato per il campo "CODICE COMUNALE": http://toponomastica.piemonte.it/id/toponimi#codiceComunale.
 
+## Scelta delle ontologie
+Oltre a definire predicati specifici adatti a descrivere il dominio dei propri dati, una buona pratica per la creazione di RDF è andare alla ricerca di ontologie standard che rendano interoperabile il proprio dataset con la Linked Data cloud.
+
+Riprendendo il caso dei toponimi, è possibile esprimere l'identificativo del toponimo stesso come segue:
+
+```
+<http://toponomastica.piemonte.it/id/toponimi/370976>  <dcterms:identifier> '370976' 
+```
+
+In questo caso utilizzo l'ontologia [Dublin Core](http://dublincore.org/).
+
+## Interlinking tra entità appartenenti a dataset differenti
+
+[TODO]
+
 ## GeoSPARQL e dati spaziali
 
 Per poter modellare e serializzare dati espressi in [WKT](https://en.wikipedia.org/wiki/Well-known_text) secondo il modello RDF, potete utilizzare il seguente esempio:
