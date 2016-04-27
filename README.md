@@ -333,23 +333,21 @@ WHERE {
 ## Casi d'uso per generazione di dati in RDF
 In questa sezione vengono riportati alcuni suggerimenti per poter procedere con la trasformazione in RDF di dati messi a disposizione da diverse pubbliche amministrazioni in contesti e domini differenti 
 
-## Identificazione di un identificativo univoco
-Occorre scegliere l'identificativo tra tutti i campi presenti all'interno del dataset, che verrà utilizzato per costruire l'URI dell'entità: consideriamo ad esempio la seguente entry all'interno di un CSV che include informazioni relative ai toponimi. 
+## Scegliere un identificativo univoco
+Occorre scegliere l'identificativo tra tutti i campi presenti all'interno del dataset, che verrà utilizzato per costruire l'URI dell'entità. Consideriamo ad esempio la seguente entry all'interno di un CSV che include informazioni relative ai toponimi: https://github.com/giuseppefutia/sparql-course/blob/master/samples/toponimi.csv.
 
-```
-WKT,	CODICE_COMUNALE,	CODICE_COM,	PROGR_NAZI,	PROGR_STRA,	DUG,	DENOM_COMP,	DENOM_DELI	LOCALITA_,	NUMERO_ACC,	DATA_CERTI,	DATA_DELIB,	PROTOCOLLO,	FLAG_DENOM,	DIZIONE_LI,	DIZIONE_L2,	DATA_PREFE,	PROTOCOLL2
-LINESTRING (454532.6922000004 5018363.2458,454437.65720000025 5018394.919199999),	1000,	L750,	370976,	6,	VIA,	ADUA,	ADUA, ,		9,	14/11/2014, , , , , , ,
-```
+In questo specifico caso gli esperti di dominio sanno che l'identificativo univoco è inserito nella voce "PROGR_NAZI". Il valore "370976" verrà utilizzato per costruire l'URI dell'entità che costituirà il soggetto principale all'interno del file RDF da generare. 
 
+In certi casi non è sempre possibile trovare un identificativo univoco: consideriamo ad esempio una singola entry del dataset relativo al patrimonio immobiliare piemontese: https://github.com/giuseppefutia/sparql-course/blob/master/samples/patrimonio-immobiliare.csv.
 
-In certi casi non è sempre possibile trovare un identificativo univoco: consideriamo ad esempio i dati relativi al patrimonio immobiliare piemontese, disponibili all'indirizzo: http://trasparenza.regione.piemonte.it/patrimonio-immobiliare.    
+In questo specifico caso è conveniente utilizzare un identificativo incrementale.
 
-```
-Anno,	Provincia,	Comune,	Indirizzo,	Descrizione,	Note
-2014,	TO,	Torino,	Viale Settimio Severo n. 65,	Complesso ex Opera Universitaria dell'Universita' di Torino denominato   "Villa Gualino",
-```
+## Definizione dell'URI di base
+Come ben sappiamo, le entità in RDF vengono espresse nella secondo URI. Per questo motivo occorre scegliere la forma dell'URI che, da un lato, costituirà la base per definire le entità del mio dataset, dall'altro, consentirà di costruire i predicati dell'ontologia interna.
 
-In questo specifico caso è conveniente utilizzare un id incrementale.
+Riprendendo ad esempio il caso dei toponimi, potremmo modellare i dati come segue:
+* Definizione dell'entità toponimo: http://toponomastica.piemonte.it/id/toponimi/370976.
+* Definizione del predicato per il campo "CODICE COMUNALE": http://toponomastica.piemonte.it/id/toponimi#codiceComunale.
 
 ## GeoSPARQL e dati spaziali
 
