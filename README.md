@@ -330,8 +330,8 @@ WHERE {
 ```
 * [Risultato della query](http://public-contracts.nexacenter.org/sparql?default-graph-uri=&query=PREFIX+gr%3A%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23%3E%0D%0APREFIX+pc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fprocurement%2Fpublic-contracts%23%3E%0D%0APREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+spc%3A+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%2F%3E%0D%0A%0D%0ASELECT+%3Flabel+SUM%28%3Famount%29+as+%3FpaidAmounts+%3FofficialEmail%0D%0AWHERE+%7B%0D%0ASELECT+DISTINCT+*%0D%0AWHERE+%7B%0D%0A+%3FcontractingAutority+%3Chttp%3A%2F%2Fpurl.org%2Fgoodrelations%2Fv1%23vatID%3E+%2200518460019%22.%0D%0A+%3FcontractingAutority+rdfs%3Alabel+%3Flabel.%0D%0A+%3FcontractingAutority+owl%3AsameAs+%3FuriSpc.%0D%0A++SERVICE+%3Chttp%3A%2F%2Fspcdata.digitpa.gov.it%3A8899%2Fsparql%3E+%7B+%0D%0A++OPTIONAL+%7B+%3FuriSpc+spc%3APEC+%3FofficialEmail.%7D+%0D%0A++%7D%0D%0A+%3Fcontract+pc%3AcontractingAutority++%3FcontractingAutority.%0D%0A+%3Fcontract+payment%3Apayment+%3Fpayment.%0D%0A+%3Fpayment+payment%3AnetAmount+%3Famount.%0D%0A%7D+ORDER+BY+%3Fcontract%0D%0A%7D+&should-sponge=&format=text%2Fhtml&timeout=0&debug=on)
 
-## Casi d'uso per generazione di dati in RDF
-In questa sezione vengono riportati alcuni suggerimenti per poter procedere con la trasformazione in RDF di dati messi a disposizione da diverse pubbliche amministrazioni in contesti e domini differenti 
+## Step per la generazione di dati in RDF
+In questa sezione vengono riportati alcuni suggerimenti per poter procedere con la trasformazione in RDF.
 
 ## Scegliere un identificativo univoco
 Occorre scegliere l'identificativo tra tutti i campi presenti all'interno del dataset, che verrà utilizzato per costruire l'URI dell'entità. Consideriamo ad esempio la seguente entry all'interno di un CSV che include informazioni relative ai toponimi: https://github.com/giuseppefutia/sparql-course/blob/master/samples/toponimi.csv.
@@ -343,7 +343,7 @@ In certi casi non è sempre possibile trovare un identificativo univoco: conside
 In questo specifico caso è conveniente utilizzare un identificativo incrementale.
 
 ## Definizione dell'URI di base
-Come ben sappiamo, le entità in RDF vengono espresse nella secondo URI. Per questo motivo occorre scegliere la forma dell'URI che, da un lato, costituirà la base per definire le entità del mio dataset, dall'altro, consentirà di costruire i predicati dell'ontologia interna.
+Come ben sappiamo, le entità in RDF vengono espresse secondo URI. Per questo motivo occorre scegliere la forma dell'URI che, da un lato, costituirà la base per definire le entità del mio dataset, dall'altro, consentirà di costruire i predicati dell'ontologia interna.
 
 Riprendendo ad esempio il caso dei toponimi, potremmo modellare i dati come segue:
 * Definizione dell'entità toponimo: http://toponomastica.piemonte.it/id/toponimi/370976.
@@ -362,7 +362,38 @@ In questo caso utilizzo l'ontologia [Dublin Core](http://dublincore.org/).
 
 ## Interlinking tra entità appartenenti a dataset differenti
 
-[TODO]
+L'interlinking tra entità appartenenti a dataset differenti può rivelarsi un task molto complesso. In alcuni casi, qualora ci siano degli identificativi ben definiti, il processo risulta piuttosto semplice. Considerate ad esempio la seguente query SPARQL che consente di individuare una pubblica amministrazione presente nel dataset dei contratti pubblici all'interno del dataset di SPCDATA:
+
+```
+SELECT DISTINCT ?entity
+WHERE { ?entity <http://www.w3.org/ns/org#identifier> '80057930150'}
+```
+
+[Risultato della query](http://spcdata.digitpa.gov.it:8899/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fentity+WHERE%0D%0A%7B+%3Fentity+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Forg%23identifier%3E+%2780057930150%27%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on).
+
+In questo caso, l'identificativo della risorsa su SPCDATA è il medesimo identificativo della risorsa sul grafo dei contratti pubblici:
+http://public-contracts.nexacenter.org/pc/businessEntities/80057930150/html.
+
+In altri casi occorre fare dei "guess" a partire dalle label. Provate la differenza tra queste due query:
+
+```
+SELECT DISTINCT ?museum WHERE {
+   ?museum rdfs:label ?label .
+   FILTER regex( str(?label), "Museo egizio", "i" ) .
+} LIMIT 10
+```
+
+[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+
+```
+SELECT DISTINCT ?museum WHERE {
+   ?museum rdfs:label ?label .
+   ?museum rdf:type <http://dbpedia.org/class/yago/MuseumsInTurin> .
+   FILTER regex( str(?label), "Museo egizio", "i" ) .
+} LIMIT 10
+```
+
+[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++%3Fmuseum+rdf%3Atype+%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2FMuseumsInTurin%3E+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ## GeoSPARQL e dati spaziali
 
