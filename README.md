@@ -369,7 +369,7 @@ SELECT DISTINCT ?entity
 WHERE { ?entity <http://www.w3.org/ns/org#identifier> '80057930150'}
 ```
 
-[Risultato della query](http://spcdata.digitpa.gov.it:8899/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fentity+WHERE%0D%0A%7B+%3Fentity+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Forg%23identifier%3E+%2780057930150%27%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on).
+* [Risultato della query](http://spcdata.digitpa.gov.it:8899/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fentity+WHERE%0D%0A%7B+%3Fentity+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Forg%23identifier%3E+%2780057930150%27%7D&should-sponge=&format=text%2Fhtml&timeout=0&debug=on)
 
 In questo caso, l'identificativo della risorsa su SPCDATA è il medesimo identificativo della risorsa sul grafo dei contratti pubblici:
 http://public-contracts.nexacenter.org/pc/businessEntities/80057930150/html.
@@ -383,7 +383,7 @@ SELECT DISTINCT ?museum WHERE {
 } LIMIT 10
 ```
 
-[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ```
 SELECT DISTINCT ?museum WHERE {
@@ -393,17 +393,45 @@ SELECT DISTINCT ?museum WHERE {
 } LIMIT 10
 ```
 
-[Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++%3Fmuseum+rdf%3Atype+%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2FMuseumsInTurin%3E+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
+* [Risultato della query](http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=%0D%0ASELECT+DISTINCT+%3Fmuseum+WHERE+%7B%0D%0A++++%3Fmuseum+rdfs%3Alabel+%3Flabel+.%0D%0A++++%3Fmuseum+rdf%3Atype+%3Chttp%3A%2F%2Fdbpedia.org%2Fclass%2Fyago%2FMuseumsInTurin%3E+.%0D%0A++++FILTER+regex%28+str%28%3Flabel%29%2C+%22Museo+egizio%22%2C+%22i%22+%29+.%0D%0A%7D+LIMIT+10&format=text%2Fhtml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on)
 
 ## GeoSPARQL e dati spaziali
 
 Per poter modellare e serializzare dati espressi in [WKT](https://en.wikipedia.org/wiki/Well-known_text) secondo il modello RDF, potete utilizzare il seguente esempio:
 
 ```
-:res1  rdf:type :House .
-:res1  :bedrooms “3”^^xsd:decimal.
-:res1  ogc:hasGeometry :geom1 .
-:geom1 ogc:asWKT “POINT(-122.25 37.46)”^^ogc:wktLiteral .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ex: <http://www.example.org/POI#> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+ex:WashingtonMonument a ex:Monument;
+ rdfs:label "Washington Monument";
+ geo:hasGeometry ex:WMPoint .
+ex:WMPoint a sf:Point;
+ geo:asWKT "POINT(-77.03524 38.889468)"^^geo:wktLiteral.
+ex:NationalMall a ex:Park;
+ rdfs:label "National Mall";
+ geo:hasGeometry ex:NMPoly .
+ex:NMPoly a sf:Polygon;
+ geo:asWKT "POLYGON((-77.050125 38.892086, -77.039482 38.892036, -77.039482 38.895393,
+-77.033669 38.895508, -77.033585 38.892052, -77.031906 38.892086, -77.031883 38.887474, -
+77.050232 38.887142, -77.050125 38.892086 ))"^^geo:wktLiteral.
+```
+
+Un esempio di query SPARQL potrebbe essere: quali monumenti si trovano all'interno di quali parchi?
+
+```
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX ex: <http://www.example.org/POI#>
+SELECT ?m ?p
+WHERE {
+   ?m a ex:Monument ;
+   geo:hasGeometry ?mgeo .
+   ?p a ex:Park ;
+   geo:hasGeometry ?pgeo .
+   ?mgeo geo:sfWithin ?pgeo .
+}
 ```
 
 ## Contatti
