@@ -10,6 +10,6 @@ node csvTriplifier.js [baseURI] [input data file path] [configuration file path]
 
 Example:
 
-```javascript
+```
 node csvTriplifier.js http://mydomain.org/ data.csv conf.json output
 ```
