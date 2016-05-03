@@ -3,12 +3,13 @@ var csv = require('csv');
 
 // TODO: Define instructions to parallelize this process.
 
-/*
+/***
  Read input parameters:
  - baseURI
- - input data
- - conf file
-*/
+ - input data file path
+ - conf file path
+ - output file path
+***/
 
 if (process.argv.length !== 6) {
       console.error("Number of arguments is wrong!");
