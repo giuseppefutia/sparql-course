@@ -1,0 +1,34 @@
+[
+    {
+        "dataType" : [
+           {
+               "Comune": "entity",
+               "NumeroCivico": "^^xsd:int"
+           }
+        ]
+    },
+    {
+        "propertiesToMap": [
+            {
+                "id": "http://data.ign.fr/id/codes/topo/typedesource/Cadastre",
+                "CodiceCatastaleComune": "http://spcdata.digitpa.gov.it/browse/page/codice_catastale",
+                "TipoBene": "http://metadataregistry.org/schemaprop/show/id/43.html",
+                "Comune": "http://spcdata.digitpa.gov.it/Comune",
+                "Provincia": "http://spcdata.digitpa.gov.it/browse/page/Provincia",
+                "CAP": "https://www.w3.org/ns/locn#postCode",
+                "Toponimo": "http://dati.piemonte.it/ontology/toponimi/dug",
+                "Strada": "http://schema.org/streetAddress",
+                "NumeroCivico": "http://data.ign.fr/def/topo#numero",
+                "TipologiaImmobile": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                "Finalita": "http://dbpedia.org/ontology/currentlyUsedFor",
+                "NaturaBene": "http://data.ign.fr/def/topo/20140416.htm#nature",
+                "Superficie": "http://schema.org/surface",
+                "Cubatura": "http://rdfs.co/bevon/latest/html#term-volume",
+                "Valore": "http://contsem.unizar.es/def/sector-publico/pproc#estimatedValue",
+                "EpocaCostruzione": "http://dbpedia.org/ontology/dateConstruction",
+                "Latitudine": "http://www.w3.org/2006/vcard/ns#latitude",
+                "Longitudine": "http://www.w3.org/2006/vcard/ns#longitude"
+            }
+        ]
+    }
+]
