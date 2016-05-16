@@ -12,7 +12,7 @@
 <#Toponomastica>
 
 	rml:logicalSource [
-	  rml:source "../../../../sparql-course/lab/toponomastica-biella-comma.csv"; # Set your path
+	  rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
     rml:referenceFormulation ql:CSV;
   ];
 
@@ -87,7 +87,7 @@
 <#GeoSPARQL>
 
   rml:logicalSource [
-	  rml:source "../../../../sparql-course/lab/toponomastica-biella-comma.csv"; # Set your path
+	  rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
     rml:referenceFormulation ql:CSV;
   ];
 
