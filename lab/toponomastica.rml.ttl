@@ -10,9 +10,8 @@
 @prefix ex:          <http://www.example.org/POI#> .
 
 <#Toponomastica>
-
-	rml:logicalSource [
-	  rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
+  rml:logicalSource [
+    rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
     rml:referenceFormulation ql:CSV;
   ];
 
@@ -25,9 +24,9 @@
     rr:predicate geo:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#GeoSPARQL> ]
-	];
+  ];
 
-  rr:predicateObjectMap [
+	rr:predicateObjectMap [
     rr:predicate spc:codice_catastale;
     rr:objectMap [ rml:reference "CODICE_COM" ];
   ];
@@ -59,46 +58,46 @@
 
   rr:predicateObjectMap [
     rr:predicate schema:Date;
-		rr:objectMap [
-		  rml:reference "DATA_CERTI";
-		  rr:termType rr:Literal;
-			rr:datatype xsd:Date;
-		];
+    rr:objectMap [
+      rml:reference "DATA_CERTI";
+      rr:termType rr:Literal;
+      rr:datatype xsd:Date;
+    ];
   ];
 
   rr:predicateObjectMap [
     rr:predicate schema:Date;
-		rr:objectMap [
-			rml:reference "DATA_DELIB";
-			rr:termType rr:Literal;
-			rr:datatype xsd:Date;
-		];
+    rr:objectMap [
+    rml:reference "DATA_DELIB";
+    rr:termType rr:Literal;
+    rr:datatype xsd:Date;
+    ];
   ];
 
   rr:predicateObjectMap [
     rr:predicate schema:Date;
-		rr:objectMap [
-			rml:reference "PREFE";
-			rr:termType rr:Literal;
-			rr:datatype xsd:Date;
-		];
+    rr:objectMap [
+      rml:reference "PREFE";
+      rr:termType rr:Literal;
+      rr:datatype xsd:Date;
+    ];
   ].
 
 <#GeoSPARQL>
 
   rml:logicalSource [
-	  rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
+    rml:source "../../../../sparql-course/lab/toponomastica-verbania-comma.csv"; # Set your path
     rml:referenceFormulation ql:CSV;
   ];
 
-	rr:subjectMap [
-		rr:template "http://community.dati.piemonte.it/id/geo/{id}" ;
-		rr:class sf:LineString;
-	];
+  rr:subjectMap [
+    rr:template "http://community.dati.piemonte.it/id/geo/{id}" ;
+    rr:class sf:LineString;
+  ];
 
-	rr:predicateObjectMap [
+  rr:predicateObjectMap [
     rr:predicate geo:asWKT;
-		rr:objectMap [
-			rml:reference "WKT";
-		];
+    rr:objectMap [
+    rml:reference "WKT";
+    ];
   ].
