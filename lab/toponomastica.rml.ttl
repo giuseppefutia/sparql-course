@@ -20,7 +20,7 @@
     rr:class community:Toponimo;
   ];
 
-	rr:predicateObjectMap [
+  rr:predicateObjectMap [
     rr:predicate geo:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#GeoSPARQL> ]
